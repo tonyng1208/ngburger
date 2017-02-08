@@ -1,0 +1,42 @@
+<div class="main-container">
+  <div *ngIf="edited" class='msgbox'>Order successful!</div>
+  <md-grid-list cols="3" rowHeight="740px" class="all-list">
+    <md-grid-tile colspan="2">
+      <md-card>
+        <h3 md-subheader>All Items</h3>
+        <md-card-content>
+          <md-grid-list cols="2" rowHeight="200px">
+            <md-grid-tile *ngFor="let item of items" style="background:gray">
+              <md-grid-tile-header class='title-header'>
+                Name: {{item.name}}
+              </md-grid-tile-header>
+              <h4 md-subheader class="price">Price: ${{item.price}}</h4>
+              <md-list *ngIf="item.ingredients" class='md-section'>
+                <h5 md-subheader>Ingredients</h5>
+                <md-list-item *ngFor="let ingredient of item.ingredients">
+                  <div class="md-list-item-text">-&nbsp;{{ingredient}}</div>
+                </md-list-item>
+              </md-list>
+              <md-checkbox class="checkbox" [(ngModel)]="item.isSelected">Checked</md-checkbox>
+            </md-grid-tile>
+          </md-grid-list>
+        </md-card-content>
+      </md-card>
+    </md-grid-tile>
+    <md-grid-tile colspan="1" class="ordered-list">
+      <md-card>
+        <h3 md-subheader>Order List</h3>
+        <md-list>
+          <div *ngFor="let item of items">
+            <md-list-item *ngIf="item.isSelected">
+              <md-icon md-list-avatar>note</md-icon>
+              <h4 md-line>{{item.name}}</h4>
+              <p md-line> Price: ${{item.price}} </p>
+            </md-list-item>
+          </div>
+          <button md-raised-button (click)="doConfirm()" >Confirm Order</button>
+        </md-list>
+      </md-card>
+    </md-grid-tile>
+  </md-grid-list>
+</div>
